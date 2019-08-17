@@ -1,2 +1,2 @@
 ## Aditya Vadlamani's Official Webpage
-[Link] (https://google.com) 
+![Profile Picture] (profile-pic-edited.jpeg)
