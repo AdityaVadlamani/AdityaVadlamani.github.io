@@ -1,2 +1,2 @@
 ## Aditya Vadlamani's Official Webpage
-![Profile Picture] (profile-pic-edited.jpeg)
+This page is currently a work in progress.
