@@ -1,0 +1,155 @@
+============================================================================ 
+EMNLP 2020 Reviews for Submission #2337
+============================================================================ 
+
+Title: Learning a Cost-Effective Annotation Policy for Question Answering
+Authors: Bernhard Kratzwald, Stefan Feuerriegel and Huan Sun
+============================================================================
+                            META-REVIEW
+============================================================================ 
+
+Comments: This paper presents a general-purpose framework for development of QA datasets which incorporates a QA model to produce which is quicker (lower cost) annotations compared with typical human annotation effort. The reviewers agreed that that approach is novel, the paper is well written, and the evaluation is strong. The AC also feels this is an important area that is very understudied by the broader research community, and likely has implication beyond its direction application in QA.
+
+============================================================================
+                            REVIEWER #1
+============================================================================
+
+What is this paper about, what contributions does it make, and what are the main strengths and weaknesses?
+---------------------------------------------------------------------------
+This paper proposes a novel framework for annotating QA datasets. This framework combines two different policies to reduce human annotation effort, 
+including a conventional manual annotation scheme (MAN) and a semi-supervised annotation scheme (SEM). In SEM, a QA matching model will pre-select 
+top-k best candidates (documents & spans) given an annotating question. In MAN, humans have to find out the correct answer in all corpus. A policy 
+model in this framework aims to choose a better one between two policies. The strength is that it is the first cost-effective policy-learning based semi-automatic annotation method for QA, while the weakness is the annotation cost reduction is simulated rather than empirically measured and the comparison with alternative method, such as active learning is not sufficient.
+---------------------------------------------------------------------------
+
+
+Reasons to accept
+---------------------------------------------------------------------------
+- According to the author , this paper is "the first to study the problem of annotating questions with minimal annotation cost." If it is really the case, such technique is interesting to practitioners in the QA domain.  
+- The proposed method does not hurt the annotation quality,  as no matter which scheme to choose all annotations are just confirmed by human annotators. 
+- This framework gets a satisfactory experiment result.
+---------------------------------------------------------------------------
+
+
+Reasons to reject
+---------------------------------------------------------------------------
+- no comparison with other methods that also reduce annotation cost, in particular active learning. Although active learning are not model-agnostic, the total annotation cost is still comparable with the proposed method. The effectiveness of the proposed method can be better evaluated in such comparison. 
+
+- Since annotation cost is very central to the claim, the empirical cost should be measured, rather than only providing a sensitivity analysis.  Specifically, the analysis of cost benefits is based on the assumption that SEM is 1/4~1/2 of the price to MAN. It would be more convincing to use human annotations to estimate actual cost and test whether it falls in that range.
+---------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+                         Reproducibility: 4
+                  Overall Recommendation: 3
+
+Questions for the Author(s)
+---------------------------------------------------------------------------
+- This paper only chooses one annotation dataset for the experiment. Although this may be due to the particularity of the task, I think there should be more experiments in the different datasets to verify the effectiveness of this framework.
+---------------------------------------------------------------------------
+
+
+Typos, Grammar, Style, and Presentation Improvements
+---------------------------------------------------------------------------
+The writing and organization of the paper can be improved.
+---------------------------------------------------------------------------
+
+
+
+============================================================================
+                            REVIEWER #2
+============================================================================
+
+What is this paper about, what contributions does it make, and what are the main strengths and weaknesses?
+---------------------------------------------------------------------------
+The paper presents an approach to lowering annotation of QA training data. In contrast to active learning, this aims at complete annotation of a data set, but leverages a QA model (which improves with growing training data) to save annotation cost through presenting answer candidates to the annotator. The problem is formulated as optimization of the policy deciding whether "manual" (classical) or "semi-supervised" (cost-saving) annotation is applied to a given question. Experiments with simulated annotation on the NaturalQuestions dataset show gains of up to ~20% annotation cost, depending on the relative cost of "semi-supervised" annotation.
+---------------------------------------------------------------------------
+
+
+Reasons to accept
+---------------------------------------------------------------------------
+The paper is novel in that it proposes annotation cost savings that do not rely on active learning and the associated coupling with a particular model: The dataset is annotated completely and at full human annotation quality and the QA model is only leveraged for suggestions to human annotators. While cost savings will depend crucially on the actual setup in practice, the simulated experiments show that they can be notable. The presentation of the paper is also very clear and easy to follow. Overall, I think this makes the paper an interesting and valuable contribution to the conference.
+---------------------------------------------------------------------------
+
+
+Reasons to reject
+---------------------------------------------------------------------------
+The main shortcoming in my view is that the simulated experiments are based on more or less arbitrary assumptions about annotation costs. As such, it's hard to predict what kind of savings could be attained in practice and if they would make implementation of these processes worthwhile. This distance from a practical setup shows in a few other places as well: Annotation costs in the semi-supervised setting are assumed to be constant, whereas in practice annotation could stop after the first positive example has been found in a top-n list, which would reduce per-item cost as the model gets better (and ranks more good answers higher up). Another example: Lines 471-473 describes that the policy can be updated from a manually annotated answer after checking whether it would have been predicted by the QA model, but this does not take into account that the QA model may fail to predict this particular answer and still contain (other) good answers in its top-n list. (This is not an !
+ issue in the simulated experiments, since the simulated annotator only accepts the correct answer in the NaturalQuestions dataset and no other.)
+
+Besides these concerns, which make the paper less practically relevant than one might hope, I'm a bit worried that reliance on suggestions and binary judgments by humans may introduce a bias determined by the QA model. In a world where many documents and many sentences may be correct, the model may be unable to find certain answers, which therefore never get presented to annotators, and never end up in the annotated data set. This could make the resulting resource less diverse and less valuable than one annotated in a fully manual manner. Only a real experiment and subsequent training of a QA model would reveal whether that's the case.
+---------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+                         Reproducibility: 5
+                  Overall Recommendation: 4
+
+Questions for the Author(s)
+---------------------------------------------------------------------------
+Have you considered commenting about the potential relationship with quality estimation models? Since the policy effectively decides whether a top-n list contains a correct answer, there seems to be a close connection with a model deciding whether to answer at all.
+---------------------------------------------------------------------------
+
+
+
+============================================================================
+                            REVIEWER #3
+============================================================================
+
+What is this paper about, what contributions does it make, and what are the main strengths and weaknesses?
+---------------------------------------------------------------------------
+This paper deals with the task of cost-effective annotation of Question-Answering (QA datasets). The primary contribution of this research is a general-purpose framework for development of QA datasets, which is quicker (lower cost) compared with typical human annotation effort. The framework presented here leverages a trainable QA system to provide suggestions for answer-bearing passages and candidate answers, which can be incorporated into the dataset through a far lower-cost human annotation work of verifying the correct answer in the list of presented options -- a boolean yes/no decision (over each item in the list) for the human annotator. The crux of the framework presented in the paper is a learned policy function that selects either the human verification annotation or the full-fledged QA annotation for each given question. This learned function optimizes for expected lower cost over the choices. The authors conduct an empirical evaluation using the NaturalQuestions d!
+ ataset, varying the full annotation cost to the simpler annotation cost ratio.
+
+While there has been much prior work in active learning that is quite related to the approach presented here, the work in this paper is still quite unique and sets itself apart from those approaches. Formulating the problem as a choice between two human annotation paradigms (with different associated costs and risks) is an interesting tact. This enables the task to be cast as a learned ML model, whose objective to make the right choice of annotation type minimizing cost and risk of incorrect label. This is quite clever.
+
+The paper is very well-written, and methodically lays out the formulation of the annotation framework, and an empirical evaluation using a standard QA dataset. By simulating various costs for the two types of human annotations involved in this work, the experiments provide interesting insights into the "savings" from this work if the light-weight annotation (SEM) were made as efficient as possible.
+
+On the other hand, it is unclear if this work could apply to other kinds of dataset creation (other than QA). It would be neat to see how the key ideas behind this work could be generalized to other tasks.
+
+A primary assumption behind this approach is that if the document and span are found by the annotator in the top-n list in the SEM annotation, then this is equivalent to the full-fledged HUM annotation for that question. While this could be true for most QA scenarios, there could be cases where the answer appears in multiple contexts, and one approach may select one context and the second approach may select another. This may introduce certain biases in the data.
+
+Also, human annotation is never perfect. Typically, inter-annotator agreement is used to derive a sense of ambiguity/uncertainty in the task. It is likely that this framework may induce differing inter-annotator agreement compared to the traditional annotation approach. It would be interesting to study this impact.
+---------------------------------------------------------------------------
+
+
+Reasons to accept
+---------------------------------------------------------------------------
+* A unique strategy for reducing annotation costs of QA dataset creation.
+
+* Well-written paper, methodically lays out the formulation of the annotation framework.
+
+* Empirical evaluation using a standard benchmark dataset, provides interesting insights into cost-ratio trade-offs of this work.
+---------------------------------------------------------------------------
+
+
+Reasons to reject
+---------------------------------------------------------------------------
+* The approach seems quite specific to this type of QA task.
+
+* Some questions on inter-annotator agreement remain open.
+---------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+                         Reproducibility: 4
+                  Overall Recommendation: 4.5
+
+Questions for the Author(s)
+---------------------------------------------------------------------------
+In Section 2, the paper states that this approach does not apply to datasets where questions are created by crowdsourcing. It is not obvious why this is the case. Couldn't this apply to those questions as well?
+
+What is the impact of the choice of N in the top-N used for this work?
+
+What are the effects of corpus size and the distribution of correct answers across the corpus in choosing this framework for annotation?
+
+This work stipulates that the QA model and the policy model are intertwined. Based on the results with no model updates, it seems that this could work even if the model were not intertwined with the policy model (unless I misunderstood).
+
+Have you done any analysis with human annotators to estimate the cost ratio between SEM and Man scheme? You've outlined that the ratio must be below 0.6 to justify your approach, and having an empirical grounding would be helpful to evaluate the effectiveness of this approach. I believe this would require putting down real cost estimates for various aspects of the annotation work (should this cost include retraining the model intermittently?) .
+---------------------------------------------------------------------------
