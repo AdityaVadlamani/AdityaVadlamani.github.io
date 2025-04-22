@@ -20,7 +20,7 @@ body {
     line-height: 1.8em;
     color: #000000;
     font-weight: 300;
-    /* background  : url("../img/pattern-bg.png") fixed; */
+    /* background: url("../img/pattern-bg.png") fixed; */
 }
 
 /* --------------------------------------
@@ -104,6 +104,13 @@ a:focus {
 
 p {
     margin-bottom: 10px;
+}
+
+hr {
+    border: none;
+    margin: 0px;
+    height: 2px;
+    background-color: #333;
 }
 
 ul {
