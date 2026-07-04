@@ -27,6 +27,24 @@
         <!-- Style CSS -->
         <link href="css/style.css" rel="stylesheet" />
 
+        <!-- Apply saved theme before first paint to avoid flash -->
+        <script>
+            (function () {
+                var saved = localStorage.getItem("theme");
+                var prefersDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)",
+                ).matches;
+                if (saved === "dark" || (!saved && prefersDark)) {
+                    document.documentElement.setAttribute("data-theme", "dark");
+                } else {
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        "light",
+                    );
+                }
+            })();
+        </script>
+
         <!-- Particles js -->
         <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
@@ -343,7 +361,7 @@
                                                 Towards Auditing AI Systems in
                                                 the Wild
                                                 <span class="pub-tag pub-tag-ai"
-                                                    >AI Systems</span
+                                                    >Auditing</span
                                                 >
                                             </h3>
                                             <h4>
@@ -352,7 +370,9 @@
                                                 Parthasarathy
                                             </h4>
                                             <h4>
-                                                KDD 2026. Blue Sky Ideas Track
+                                                KDD 2026. Knowledge Discovery
+                                                and Data Mining&mdash;Blue Sky
+                                                Ideas Track
                                             </h4>
                                             <p>
                                                 <a
@@ -825,5 +845,36 @@
 
         <!-- Profile pic random selection -->
         <script src="js/profile-pic.js"></script>
+
+        <!-- Dark mode toggle -->
+        <button id="theme-toggle" aria-label="Toggle dark mode">
+            <i id="theme-icon" class="fa fa-moon-o" aria-hidden="true"></i>
+        </button>
+        <script>
+            (function () {
+                var toggle = document.getElementById("theme-toggle");
+                var icon = document.getElementById("theme-icon");
+                var root = document.documentElement;
+
+                function applyTheme(dark) {
+                    if (dark) {
+                        root.setAttribute("data-theme", "dark");
+                        icon.className = "fa fa-sun-o";
+                        localStorage.setItem("theme", "dark");
+                    } else {
+                        root.setAttribute("data-theme", "light");
+                        icon.className = "fa fa-moon-o";
+                        localStorage.setItem("theme", "light");
+                    }
+                }
+
+                // Sync icon with whatever theme was applied on load
+                applyTheme(root.getAttribute("data-theme") === "dark");
+
+                toggle.addEventListener("click", function () {
+                    applyTheme(root.getAttribute("data-theme") !== "dark");
+                });
+            })();
+        </script>
     </body>
 </html>

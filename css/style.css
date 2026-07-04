@@ -5,20 +5,48 @@ Version: 1.0
 Author: themehippo.com
 */
 
-/*------------------------------------------------------------------
-# [Color codes]
-
-# Body  (text): #3a4750
-# Heading Color #444444
-# Theme Color (link color) #82b541
-# Mid grey (sub header) #f4f4f4
-# -------------------------------------------------------------------*/
+/* ------------------------------------------
+ * Theme variables — light defaults
+ * ------------------------------------------ */
+:root {
+    --bg: #ffffff;
+    --surface: rgba(255, 255, 255, 0.775);
+    --text: #000000;
+    --heading: #0d0d12;
+    --subtext: gray;
+    --subtext-sm: #888888;
+    --border: #eaeaea;
+    --link: #0015ff;
+    --link-hover: #072cff;
+    --hr-color: #333333;
+    --preloader-bg: rgba(255, 255, 255, 0.8);
+    --icon-color: #333333;
+    --icon-border: #eeeeee;
+    --icon-border-hover: #cccccc;
+    --disabled-color: #aaa;
+    --toggle-bg: transparent;
+    --toggle-color: #555555;
+    --toggle-border: #eeeeee;
+    /* Publication tag colors */
+    --tag-cp-bg: #dbeafe;
+    --tag-cp-text: #1d4ed8;
+    --tag-graph-bg: #dcfce7;
+    --tag-graph-text: #166534;
+    --tag-fairness-bg: #ede9fe;
+    --tag-fairness-text: #6d28d9;
+    --tag-fed-bg: #ffedd5;
+    --tag-fed-text: #9a3412;
+    --tag-ai-bg: #ccfbf1;
+    --tag-ai-text: #0f766e;
+    --tag-edu-bg: #f3f4f6;
+    --tag-edu-text: #374151;
+}
 
 body {
     font-family: "Hind", sans-serif;
     font-size: 17px;
     line-height: 1.8em;
-    color: #000000;
+    color: var(--text);
     font-weight: 300;
 }
 
@@ -33,7 +61,7 @@ h4,
 h5,
 h6 {
     margin: 0 0 15px;
-    color: #0d0d12;
+    color: var(--heading);
 }
 
 h1 {
@@ -58,7 +86,7 @@ h4 {
     font-size: 15px;
     line-height: 1.8em;
     font-weight: 500;
-    color: gray;
+    color: var(--subtext);
 }
 
 h5 {
@@ -79,7 +107,7 @@ h6 {
  * LINK STYLE
  *------------------------------------------*/
 a {
-    color: #0015ff;
+    color: var(--link);
     text-decoration: none;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
@@ -98,7 +126,7 @@ a:active {
 a:hover,
 a:focus {
     text-decoration: none;
-    color: #072cff;
+    color: var(--link-hover);
 }
 
 p {
@@ -109,7 +137,7 @@ hr {
     border: none;
     margin: 0px;
     height: 2px;
-    background-color: #333;
+    background-color: var(--hr-color);
 }
 
 ul {
@@ -180,7 +208,7 @@ button:focus,
     flex-direction: row;
     margin: 60px auto;
     padding: 0;
-    box-shadow: 0 0 0 1px #eaeaea;
+    box-shadow: 0 0 0 1px var(--border);
 }
 
 .blocks {
@@ -192,15 +220,15 @@ button:focus,
     -webkit-flex: 1 0 0;
     flex: 1 0 0;
     position: relative;
-    background: rgba(255, 255, 255, 0.8);
-    border-right: 1px solid #eaeaea;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
 }
 
 .right-col-block {
     -webkit-flex: 2 0 0;
     flex: 2 0 0;
     position: relative;
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--surface);
 }
 
 @media (max-width: 768px) {
@@ -235,7 +263,7 @@ button:focus,
  * -------------------*/
 
 .gray-bg {
-    background-color: #ffffff;
+    background-color: var(--bg);
 }
 
 /* --------------------
@@ -250,7 +278,7 @@ button:focus,
  *-------------------*/
 .section-wrapper {
     padding: 20px 50px 20px 50px;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid var(--border);
 }
 
 @media (max-width: 480px) {
@@ -314,7 +342,7 @@ button:focus,
     .header {
         padding: 0;
         text-align: center;
-        border-bottom: 1px solid #ededed;
+        border-bottom: 1px solid var(--border);
     }
 
     .header img {
@@ -352,17 +380,17 @@ button:focus,
 .social-icon li a {
     display: block;
     font-size: 12px;
-    color: #333333;
+    color: var(--icon-color);
     width: 34px;
     height: 34px;
     line-height: 33px;
     text-align: center;
     border-radius: 2px;
-    border: 2px solid #eeeeee;
+    border: 2px solid var(--icon-border);
 }
 
 .social-icon li a:hover {
-    border-color: #cccccc;
+    border-color: var(--icon-border-hover);
 }
 
 /*-------------------
@@ -484,7 +512,7 @@ button:focus,
 }
 
 .content-item small {
-    color: #888888;
+    color: var(--subtext-sm);
 }
 .content-item p {
     line-height: 1.25;
@@ -493,12 +521,15 @@ button:focus,
 .content-item ul li + li {
     margin-top: 6px;
 }
+
 /*-------------------
  * Publication Tags
  *
  * To add a new tag:
  *   1. Add a .pub-tag-{name} rule below with background-color + color
- *   2. Use <span class="pub-tag pub-tag-{name}">Label</span> in HTML
+ *   2. Add corresponding --tag-{name}-bg / --tag-{name}-text variables in
+ *      :root (light) and the dark-mode blocks at the bottom of this file
+ *   3. Use <span class="pub-tag pub-tag-{name}">Label</span> in HTML
  *-------------------*/
 .pub-tag {
     display: inline-block;
@@ -514,39 +545,68 @@ button:focus,
 
 /* Conformal Prediction */
 .pub-tag-cp {
-    background-color: #dbeafe;
-    color: #1d4ed8;
+    background-color: var(--tag-cp-bg);
+    color: var(--tag-cp-text);
 }
 /* Graph machine learning */
 .pub-tag-graph {
-    background-color: #dcfce7;
-    color: #166534;
+    background-color: var(--tag-graph-bg);
+    color: var(--tag-graph-text);
 }
 /* Algorithmic fairness */
 .pub-tag-fairness {
-    background-color: #ede9fe;
-    color: #6d28d9;
+    background-color: var(--tag-fairness-bg);
+    color: var(--tag-fairness-text);
 }
 /* Federated learning */
 .pub-tag-federated {
-    background-color: #ffedd5;
-    color: #9a3412;
+    background-color: var(--tag-fed-bg);
+    color: var(--tag-fed-text);
 }
 /* AI systems / auditing */
 .pub-tag-ai {
-    background-color: #ccfbf1;
-    color: #0f766e;
+    background-color: var(--tag-ai-bg);
+    color: var(--tag-ai-text);
 }
 /* Engineering education */
 .pub-tag-education {
-    background-color: #f3f4f6;
-    color: #374151;
+    background-color: var(--tag-edu-bg);
+    color: var(--tag-edu-text);
 }
 
 /* Unavailable links (e.g. code not yet released) */
 .link-disabled {
-    color: #aaa;
+    color: var(--disabled-color);
     cursor: default;
+}
+
+/*-------------------
+ * Theme Toggle Button
+ *-------------------*/
+#theme-toggle {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 1001;
+    background: var(--bg);
+    border: 2px solid var(--toggle-border);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    color: var(--toggle-color);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        border-color 0.2s,
+        color 0.2s;
+    padding: 0;
+}
+
+#theme-toggle:hover {
+    border-color: var(--icon-border-hover);
 }
 
 /*-------------------
@@ -589,7 +649,7 @@ button:focus,
 
 .footer .copyright-section {
     font-size: 13px;
-    color: #888888;
+    color: var(--subtext-sm);
 }
 
 .footer .copyright-section .copytext {
@@ -614,7 +674,7 @@ button:focus,
 }
 
 #preloader {
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--preloader-bg);
     bottom: 0;
     left: 0;
     position: fixed;
@@ -653,14 +713,86 @@ button:focus,
     position: fixed;
     top: 0;
     left: 0;
-    background-color: white; /* Optional: Set background color */
-    z-index: -1; /* Make sure particles are in the background */
+    background-color: var(--bg);
+    z-index: -1;
 }
-/* Additional content you might want */
-/* .content {
-    position: relative;
-    z-index: 1;
-    color: white;
-    text-align: center;
-    padding: 20px;
-} */
+
+/* ================================================
+ * Dark Mode — variable overrides
+ *
+ * [data-theme="dark"]  : manually toggled via button
+ * @media               : follows OS preference when
+ *                        no manual choice is saved
+ * ================================================ */
+
+/* Keep both blocks in sync when updating colors */
+[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0f0f17;
+    --surface: rgba(15, 15, 23, 0.5);
+    --text: #e2e8f0;
+    --heading: #f1f5f9;
+    --subtext: #94a3b8;
+    --subtext-sm: #64748b;
+    --border: #2a2a3e;
+    --link: #7c9ef5;
+    --link-hover: #a5b4fc;
+    --hr-color: #3a3a5a;
+    --preloader-bg: rgba(15, 15, 23, 0.97);
+    --icon-color: #cbd5e1;
+    --icon-border: #2a2a3e;
+    --icon-border-hover: #4a4a6e;
+    --disabled-color: #4a5568;
+    --toggle-bg: transparent;
+    --toggle-color: #cbd5e1;
+    --toggle-border: #2a2a3e;
+    /* Publication tags — darker backgrounds, lighter text */
+    --tag-cp-bg: #1e3a5f;
+    --tag-cp-text: #93c5fd;
+    --tag-graph-bg: #14532d;
+    --tag-graph-text: #86efac;
+    --tag-fairness-bg: #3b0764;
+    --tag-fairness-text: #c4b5fd;
+    --tag-fed-bg: #7c2d12;
+    --tag-fed-text: #fdba74;
+    --tag-ai-bg: #134e4a;
+    --tag-ai-text: #5eead4;
+    --tag-edu-bg: #1f2937;
+    --tag-edu-text: #d1d5db;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #0f0f17;
+        --surface: rgba(15, 15, 23, 0.5);
+        --text: #e2e8f0;
+        --heading: #f1f5f9;
+        --subtext: #94a3b8;
+        --subtext-sm: #64748b;
+        --border: #2a2a3e;
+        --link: #7c9ef5;
+        --link-hover: #a5b4fc;
+        --hr-color: #3a3a5a;
+        --preloader-bg: rgba(15, 15, 23, 0.97);
+        --icon-color: #cbd5e1;
+        --icon-border: #2a2a3e;
+        --icon-border-hover: #4a4a6e;
+        --disabled-color: #4a5568;
+        --toggle-bg: transparent;
+        --toggle-color: #cbd5e1;
+        --toggle-border: #2a2a3e;
+        --tag-cp-bg: #1e3a5f;
+        --tag-cp-text: #93c5fd;
+        --tag-graph-bg: #14532d;
+        --tag-graph-text: #86efac;
+        --tag-fairness-bg: #3b0764;
+        --tag-fairness-text: #c4b5fd;
+        --tag-fed-bg: #7c2d12;
+        --tag-fed-text: #fdba74;
+        --tag-ai-bg: #134e4a;
+        --tag-ai-text: #5eead4;
+        --tag-edu-bg: #1f2937;
+        --tag-edu-text: #d1d5db;
+    }
+}
