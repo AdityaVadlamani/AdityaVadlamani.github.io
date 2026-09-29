@@ -40,6 +40,10 @@ Author: themehippo.com
     --tag-ai-text: #0f766e;
     --tag-edu-bg: #f3f4f6;
     --tag-edu-text: #374151;
+    --tag-ppi-bg: #fce7f3;
+    --tag-ppi-text: #9d174d;
+    --tag-transfer-bg: #fef9c3;
+    --tag-transfer-text: #854d0e;
 }
 
 body {
@@ -255,6 +259,14 @@ button:focus,
     .columns-block {
         margin-top: 30px;
         margin-bottom: 30px;
+    }
+}
+
+/* Widen beyond Bootstrap's fixed 1170px container on large screens */
+@media (min-width: 1200px) {
+    .columns-block.container {
+        width: calc(100% - 60px);
+        max-width: 1400px;
     }
 }
 
@@ -543,6 +555,17 @@ button:focus,
     margin-left: 5px;
 }
 
+/* Right-aligns a title's tags as one unit, on the title's last line if they fit */
+.pub-tags {
+    float: right;
+    text-align: right;
+    margin-left: 10px;
+}
+
+.content-item h3:has(.pub-tags) {
+    display: flow-root;
+}
+
 /* Conformal Prediction */
 .pub-tag-cp {
     background-color: var(--tag-cp-bg);
@@ -572,6 +595,16 @@ button:focus,
 .pub-tag-education {
     background-color: var(--tag-edu-bg);
     color: var(--tag-edu-text);
+}
+/* Prediction-powered inference */
+.pub-tag-ppi {
+    background-color: var(--tag-ppi-bg);
+    color: var(--tag-ppi-text);
+}
+/* Transfer learning */
+.pub-tag-transfer {
+    background-color: var(--tag-transfer-bg);
+    color: var(--tag-transfer-text);
 }
 
 /* Unavailable links (e.g. code not yet released) */
@@ -759,6 +792,10 @@ button:focus,
     --tag-ai-text: #5eead4;
     --tag-edu-bg: #1f2937;
     --tag-edu-text: #d1d5db;
+    --tag-ppi-bg: #500724;
+    --tag-ppi-text: #f9a8d4;
+    --tag-transfer-bg: #422006;
+    --tag-transfer-text: #fde047;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -794,5 +831,9 @@ button:focus,
         --tag-ai-text: #5eead4;
         --tag-edu-bg: #1f2937;
         --tag-edu-text: #d1d5db;
+        --tag-ppi-bg: #500724;
+        --tag-ppi-text: #f9a8d4;
+        --tag-transfer-bg: #422006;
+        --tag-transfer-text: #fde047;
     }
 }
