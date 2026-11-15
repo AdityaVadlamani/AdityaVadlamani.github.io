@@ -1,9 +1,7 @@
 // List of image URLs
 const images = [
-  { src: "img/linkedin.jpg", weight: 0.4 },
-  { src: "img/lego_wings.jpg", weight: 0.1 },
-  { src: "img/eagle_lake.png", weight: 0.1 },
-  { src: "img/singapore.jpg", weight: 0.4 },
+  { src: "img/linkedin.jpg", weight: 0.5 },
+  { src: "img/singapore.jpg", weight: 0.5 },
 ];
 
 function setRandomImage() {
@@ -30,5 +28,6 @@ function setRandomImage() {
   imgElement.src = images[selectedIndex].src;
 }
 
-// Set the random image on page load
-window.onload = setRandomImage;
+// Run immediately (this script is placed right after the <img> tag), so the
+// image request starts during HTML parsing instead of after window.onload.
+setRandomImage();
