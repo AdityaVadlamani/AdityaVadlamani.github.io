@@ -1,9 +1,9 @@
 // List of image URLs
 const images = [
-  { src: "img/linkedin.jpg", weight: 0.25 },
-  { src: "img/lego_wings.jpg", weight: 0.15 },
-  { src: "img/eagle_lake.png", weight: 0.3 },
-  { src: "img/singapore.jpg", weight: 0.3 },
+  { src: "img/linkedin.jpg", weight: 0.4 },
+  { src: "img/lego_wings.jpg", weight: 0.1 },
+  { src: "img/eagle_lake.png", weight: 0.1 },
+  { src: "img/singapore.jpg", weight: 0.4 },
 ];
 
 function setRandomImage() {
